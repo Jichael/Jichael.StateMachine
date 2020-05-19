@@ -6,4 +6,4 @@ Can be used to make quests, UI transitions and much more.
 
 ### Dependencies
 
-  * Jichaels's Core : https://github.com/Jichael/JichaelsUPM.git#JichaelsCore
+  * Jichaels's Core : https://github.com/Jichael/Jichaels.Core
