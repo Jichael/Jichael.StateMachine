@@ -1,5 +1,5 @@
 using System.Collections;
-using Jichaels.Core;
+using CustomPackages.Silicom.Core.Runtime;
 using UnityEngine;
 
 namespace Jichaels.StateMachine
@@ -69,13 +69,13 @@ namespace Jichaels.StateMachine
         }
 
 #if UNITY_EDITOR
-    private void PrintPath()
-    {
-        for (int i = 0; i < CurrentStateMachine.StatePath.Count; i++)
+        private void PrintPath()
         {
-            Debug.Log($"Path[{i.ToString()}] : {CurrentStateMachine.StatePath[i]}");
+            for (int i = 0; i < CurrentStateMachine.StatePath.Count; i++)
+            {
+                Debug.Log($"Path[{i.ToString()}] : {CurrentStateMachine.StatePath[i]}");
+            }
         }
-    }
 #endif
 
     }

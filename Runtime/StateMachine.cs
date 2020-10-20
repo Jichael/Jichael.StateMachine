@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Jichaels.Core;
+using CustomPackages.Silicom.Core.Runtime;
 using UnityEngine;
 
 namespace Jichaels.StateMachine
@@ -14,14 +14,11 @@ namespace Jichaels.StateMachine
         public State CurrentState { get; private set; }
         public bool WaitingForStateEvents { get; private set; }
         public bool WaitingForTransitionEvents { get; private set; }
-        
+
         [SerializeField] private State initialState;
         public string stateMachineName;
 
-        public StateScore stateScore;
-
         public bool dontDestroyOnLoad;
-        
 
         private bool[] _eventsFinished;
         
