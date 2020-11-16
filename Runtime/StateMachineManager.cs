@@ -1,5 +1,6 @@
 using System.Collections;
 using CustomPackages.Silicom.Core.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Jichaels.StateMachine
@@ -11,11 +12,12 @@ namespace Jichaels.StateMachine
         public StateMachine CurrentStateMachine { get; private set; }
 
         [SerializeField] private StateMachine stateMachine;
+        [SerializeField] private bool autoStart;
 
         private void Start()
         {
-            LoadStateMachine(stateMachine);
-            StartLoadedStateMachine();
+            if (stateMachine) LoadStateMachine(stateMachine);
+            if (autoStart) StartLoadedStateMachine();
         }
 
         public void LoadStateMachine(StateMachine toLoad)
