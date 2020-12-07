@@ -6,8 +6,8 @@ namespace Jichaels.StateMachine
     public class TCStatePathError : TransitionCondition
     {
 
-        [SerializeField] private string scenarioName;
-        [SerializeField] private string stateName;
+        [SerializeField] private StateMachinePath stateMachinePath;
+        [SerializeField] private State state;
         [SerializeField] private int minNumForError;
         [SerializeField] private bool wantedState;
 
@@ -20,26 +20,11 @@ namespace Jichaels.StateMachine
 
         private bool IsError()
         {
-            StateMachine[] scenarios = FindObjectsOfType<StateMachine>();
-            StateMachine stateMachine = null;
-
-            for (int i = 0; i < scenarios.Length; i++)
-            {
-                if (scenarios[i].stateMachineName != scenarioName) continue;
-                stateMachine = scenarios[i];
-                break;
-            }
-
-            if (stateMachine == null)
-            {
-                Debug.LogError($"Scenario '{scenarioName}' could not be found !");
-                return !wantedState;
-            }
-
             int nbError = 0;
-            for (int i = 0; i < stateMachine.StatePath.Count; i++)
+            
+            for (int i = 0; i < stateMachinePath.Path.Count; i++)
             {
-                if (stateMachine.StatePath[i] == stateName)
+                if (stateMachinePath.Path[i] == state)
                 {
                     nbError++;
                 }

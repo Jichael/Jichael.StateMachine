@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -7,11 +8,18 @@ namespace Jichaels.StateMachine
     public class State : MonoBehaviour
     {
 
+        public event Action OnStateStarted;
+        
         public StateEvent[] stateEvent;
 
         [HideInInspector] public Transition[] transitions;
 
         public bool endState;
+
+        public void StartState()
+        {
+            OnStateStarted?.Invoke();
+        }
 
         public int MoveNext()
         {

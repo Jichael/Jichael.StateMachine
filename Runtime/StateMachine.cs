@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using CustomPackages.Silicom.Core.Runtime;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ namespace Jichaels.StateMachine
 
     public class StateMachine : MonoBehaviour
     {
-        public List<string> StatePath { get; } = new List<string>();
-        
+        public event Action<State> OnStateStarted;
+        public event Action<State> OnStateFinished;
         public bool IsFinished { get; private set; }
         public State CurrentState { get; private set; }
         public bool WaitingForStateEvents { get; private set; }
@@ -34,12 +34,9 @@ namespace Jichaels.StateMachine
             
             CurrentState = state;
             
-            StatePath.Add(CurrentState.name);
-            
-    #if UNITY_EDITOR
-            print($"Entering state '{CurrentState.name}'");
-    #endif
-            
+            OnStateStarted?.Invoke(CurrentState);
+            CurrentState.StartState();
+
             if (CurrentState.endState)
             {
                 IsFinished = true;
@@ -115,14 +112,12 @@ namespace Jichaels.StateMachine
             } while (!allCoroutinesFinished);
 
             WaitingForStateEvents = false;
+            
+            OnStateFinished?.Invoke(CurrentState);
         }
 
         public void StartScenario()
         {
-            
-    #if UNITY_EDITOR
-            print($"Starting state machine '{stateMachineName}'");
-    #endif
             IsFinished = false;
             LoadState(initialState);
         }

@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using CustomPackages.Silicom.Core.Runtime;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Jichaels.StateMachine
@@ -10,13 +10,16 @@ namespace Jichaels.StateMachine
     {
 
         public StateMachine CurrentStateMachine { get; private set; }
+        public static event Action<StateMachine> OnStateMachineStarted;
+        public static event Action<StateMachine> OnStateMachineFinished;
 
         [SerializeField] private StateMachine stateMachine;
         [SerializeField] private bool autoStart;
 
         private void Start()
         {
-            if (stateMachine) LoadStateMachine(stateMachine);
+            if (!stateMachine) return;
+            LoadStateMachine(stateMachine);
             if (autoStart) StartLoadedStateMachine();
         }
 
@@ -27,6 +30,7 @@ namespace Jichaels.StateMachine
 
         public void StartLoadedStateMachine()
         {
+            OnStateMachineStarted?.Invoke(CurrentStateMachine);
             CurrentStateMachine.StartScenario();
             StartCoroutine(ExecuteStateMachine());
         }
@@ -54,11 +58,8 @@ namespace Jichaels.StateMachine
 
                 yield return Yielders.EndOfFrame;
             }
-
-#if UNITY_EDITOR
-        print($"{CurrentStateMachine.name} is finished !");
-        PrintPath();
-#endif
+            
+            OnStateMachineFinished?.Invoke(CurrentStateMachine);
 
             if (CurrentStateMachine.dontDestroyOnLoad)
             {
@@ -69,17 +70,6 @@ namespace Jichaels.StateMachine
 
 
         }
-
-#if UNITY_EDITOR
-        private void PrintPath()
-        {
-            for (int i = 0; i < CurrentStateMachine.StatePath.Count; i++)
-            {
-                Debug.Log($"Path[{i.ToString()}] : {CurrentStateMachine.StatePath[i]}");
-            }
-        }
-#endif
-
     }
 
 }
