@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Events;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     [Serializable]

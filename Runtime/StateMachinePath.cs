@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Jichaels.StateMachine;
+using Silicom.StateMachine;
 using UnityEngine;
 
 [RequireComponent(typeof(StateMachine))]
@@ -8,16 +8,8 @@ public class StateMachinePath : MonoBehaviour
     
     public List<State> Path { get; } = new List<State>();
 
-    [SerializeField] private StateMachine stateMachine;
-
     [SerializeField] private bool logs;
-
-    private void OnValidate()
-    {
-        stateMachine = GetComponent<StateMachine>();
-    }
-
-    private void Start()
+    private void Awake()
     {
         StateMachineManager.OnStateMachineStarted += OnStateMachineStarted;
         StateMachineManager.OnStateMachineFinished += OnStateMachineFinished;
@@ -31,7 +23,7 @@ public class StateMachinePath : MonoBehaviour
 
     private void OnStateMachineStarted(StateMachine stateMachine)
     {
-        if(logs) Debug.Log($"StateMachine started : '{stateMachine.stateMachineName}'");
+        if(logs) Debug.Log($"StateMachine started : '{stateMachine.stateMachineName}'", stateMachine);
         stateMachine.OnStateStarted += OnStateStarted;
         stateMachine.OnStateFinished += OnStateFinished;
     }
@@ -40,7 +32,7 @@ public class StateMachinePath : MonoBehaviour
     {
         if (logs)
         {
-            Debug.Log($"StateMachine finished : '{stateMachine.stateMachineName}'");
+            Debug.Log($"StateMachine finished : '{stateMachine.stateMachineName}'", stateMachine);
             PrintPath();
         }
         stateMachine.OnStateStarted -= OnStateStarted;
@@ -49,13 +41,13 @@ public class StateMachinePath : MonoBehaviour
     
     private void OnStateStarted(State state)
     {
-        if(logs) Debug.Log($"Started state '{state.name}'");
+        if(logs) Debug.Log($"Started state '{state.name}'", state);
         Path.Add(state);
     }
     
     private void OnStateFinished(State state)
     {
-        if(logs) Debug.Log($"Finished state '{state.name}'");
+        if(logs) Debug.Log($"Finished state '{state.name}'", state);
     }
     
     private void PrintPath()

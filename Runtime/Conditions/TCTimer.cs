@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class TCTimer : TransitionCondition
     {
         public override bool Condition => TimerCheck();
 
-        public override void Reset()
+        public override void ResetCondition()
         {
             _timer = 0;
         }

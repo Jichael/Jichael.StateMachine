@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
     public class TCTransformDistance : TransitionCondition
     {
@@ -14,7 +14,7 @@ namespace Jichaels.StateMachine
 
         public override bool Condition => CheckForDistance();
 
-        public override void Reset()
+        public override void ResetCondition()
         {
 
         }

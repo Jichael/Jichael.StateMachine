@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
     public class TCActiveState : TransitionCondition
     {
         public override bool Condition => CheckState();
 
-        public override void Reset()
+        public override void ResetCondition()
         {
 
         }

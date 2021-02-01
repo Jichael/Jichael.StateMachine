@@ -1,8 +1,9 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class State : MonoBehaviour
@@ -36,15 +37,22 @@ namespace Jichaels.StateMachine
         }
 
 #if UNITY_EDITOR
+        
+    [Button]
+    private void CreateTransition()
+    {
+        if (endState)
+        {
+            Debug.LogWarning("End states cannot have transitions !", this);
+            return;
+        }
+        GameObject transition = new GameObject();
+        transition.AddComponent<Transition>();
+        transition.transform.SetParent(transform);
+    }
+
     private void OnValidate()
     {
-        if (transform.childCount == 0 && !endState)
-        {
-            GameObject transition = new GameObject();
-            transition.AddComponent<Transition>();
-            transition.transform.SetParent(transform);
-        }
-
         transitions = GetComponentsInChildren<Transition>();
     }
 

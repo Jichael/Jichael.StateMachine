@@ -1,4 +1,4 @@
-﻿using Jichaels.StateMachine;
+﻿using Silicom.StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +12,7 @@ public class TCKeyTrigger : TransitionCondition
     private bool _enabled;
 
     public override bool Condition => EnableCondition();
-    public override void Reset()
+    public override void ResetCondition()
     {
         _enabled = false;
         _performed = false;

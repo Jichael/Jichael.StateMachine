@@ -3,7 +3,7 @@ using System.Collections;
 using CustomPackages.Silicom.Core.Runtime;
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class StateMachineManager : MonoBehaviour
@@ -60,14 +60,6 @@ namespace Jichaels.StateMachine
             }
             
             OnStateMachineFinished?.Invoke(CurrentStateMachine);
-
-            if (CurrentStateMachine.dontDestroyOnLoad)
-            {
-                CurrentStateMachine.transform.DetachChildren();
-                CurrentStateMachine.transform.SetParent(null);
-                DontDestroyOnLoad(CurrentStateMachine.gameObject);
-            }
-
 
         }
     }

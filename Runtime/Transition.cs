@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class Transition : MonoBehaviour
@@ -29,7 +29,7 @@ namespace Jichaels.StateMachine
         {
             for (int i = 0; i < conditions.Length; i++)
             {
-                conditions[i].Reset();
+                conditions[i].ResetCondition();
             }
         }
 

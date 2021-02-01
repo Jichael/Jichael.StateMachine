@@ -1,4 +1,4 @@
-﻿using Jichaels.StateMachine;
+﻿using Silicom.StateMachine;
 using UnityEngine;
 
 public class TCControlledState : TransitionCondition
@@ -7,7 +7,7 @@ public class TCControlledState : TransitionCondition
     [SerializeField] private bool wantedState;
     
     public override bool Condition => controlled.State == wantedState;
-    public override void Reset()
+    public override void ResetCondition()
     {
         controlled.State = false;
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using CustomPackages.Silicom.Core.Runtime;
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class StateMachine : MonoBehaviour
@@ -15,10 +15,8 @@ namespace Jichaels.StateMachine
         public bool WaitingForStateEvents { get; private set; }
         public bool WaitingForTransitionEvents { get; private set; }
 
-        [SerializeField] private State initialState;
+        public State initialState;
         public string stateMachineName;
-
-        public bool dontDestroyOnLoad;
 
         private bool[] _eventsFinished;
         
@@ -76,6 +74,8 @@ namespace Jichaels.StateMachine
 
             WaitingForTransitionEvents = false;
             
+            OnStateFinished?.Invoke(CurrentState);
+            
             LoadState(transition.nextState);
         }
 
@@ -112,8 +112,6 @@ namespace Jichaels.StateMachine
             } while (!allCoroutinesFinished);
 
             WaitingForStateEvents = false;
-            
-            OnStateFinished?.Invoke(CurrentState);
         }
 
         public void StartScenario()

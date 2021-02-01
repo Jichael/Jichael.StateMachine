@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class TCStatePathError : TransitionCondition
@@ -13,7 +13,7 @@ namespace Jichaels.StateMachine
 
         public override bool Condition => IsError();
 
-        public override void Reset()
+        public override void ResetCondition()
         {
 
         }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Jichaels.StateMachine
+namespace Silicom.StateMachine
 {
 
     public class StateScore : MonoBehaviour
