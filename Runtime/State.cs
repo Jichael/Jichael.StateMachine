@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -8,7 +9,6 @@ namespace Silicom.StateMachine
 
     public class State : MonoBehaviour
     {
-
         public event Action OnStateStarted;
         
         public StateEvent[] stateEvent;
@@ -26,6 +26,7 @@ namespace Silicom.StateMachine
         {
             for (int i = 0; i < transitions.Length; i++)
             {
+                if (!transitions[i].gameObject.activeSelf) continue;
                 if (transitions[i].Condition)
                 {
                     transitions[i].ResetConditions();
@@ -49,6 +50,7 @@ namespace Silicom.StateMachine
         GameObject transition = new GameObject();
         transition.AddComponent<Transition>();
         transition.transform.SetParent(transform);
+        Selection.activeGameObject = transition;
     }
 
     private void OnValidate()

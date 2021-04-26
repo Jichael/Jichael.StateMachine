@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Silicom.StateMachine
@@ -39,6 +40,15 @@ namespace Silicom.StateMachine
     {
         conditions = GetComponents<TransitionCondition>();
         if(nextState != null) name = $"Transition_{nextState.name}";
+    }
+
+    [Button]
+    private void DebugCheckTransition()
+    {
+        for (int i = 0; i < conditions.Length; i++)
+        {
+            Debug.Log($"{conditions[i]} : {conditions[i].Condition}", conditions[i]);
+        }
     }
 #endif
 

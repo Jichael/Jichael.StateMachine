@@ -199,6 +199,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &11951096
@@ -418,6 +419,7 @@ MonoBehaviour:
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
+  m_AllowXRRendering: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -549,6 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 1705983806}
+  autoStart: 0
 --- !u!4 &1084524952
 Transform:
   m_ObjectHideFlags: 0
@@ -766,8 +769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialState: {fileID: 189324489}
   stateMachineName: My very first state machine !
-  stateScore: {fileID: 0}
-  dontDestroyOnLoad: 0
 --- !u!1 &1754680145
 GameObject:
   m_ObjectHideFlags: 0

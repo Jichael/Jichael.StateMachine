@@ -8,7 +8,9 @@ public class StateMachinePath : MonoBehaviour
     
     public List<State> Path { get; } = new List<State>();
 
+    [SerializeField] private StateMachine stateMachine;
     [SerializeField] private bool logs;
+    
     private void Awake()
     {
         StateMachineManager.OnStateMachineStarted += OnStateMachineStarted;
@@ -23,6 +25,7 @@ public class StateMachinePath : MonoBehaviour
 
     private void OnStateMachineStarted(StateMachine stateMachine)
     {
+        if (stateMachine != this.stateMachine) return;
         if(logs) Debug.Log($"StateMachine started : '{stateMachine.stateMachineName}'", stateMachine);
         stateMachine.OnStateStarted += OnStateStarted;
         stateMachine.OnStateFinished += OnStateFinished;
@@ -30,6 +33,7 @@ public class StateMachinePath : MonoBehaviour
 
     private void OnStateMachineFinished(StateMachine stateMachine)
     {
+        if (stateMachine != this.stateMachine) return;
         if (logs)
         {
             Debug.Log($"StateMachine finished : '{stateMachine.stateMachineName}'", stateMachine);
